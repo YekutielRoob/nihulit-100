@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מה זה מקדמות מס הכנסה - ניהולית 100</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background-color: #fafafa;
+        }
+        
+        /* ניווט */
+        nav {
+            background: linear-gradient(135deg, #1a3a52 0%, #0d1b27 100%);
+            padding: 1.5rem;
+            position: sticky;
+            top: 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #d4af37;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.7rem 1.2rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #d4af37;
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        nav a.active {
+            background-color: #d4af37;
+            color: #1a3a52;
+        }
+        
+        /* Header */
+        .article-header {
+            background: linear-gradient(135deg, #1a3a52 0%, #2c5f8d 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .article-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="1200" height="800" fill="url(%23pattern)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .article-header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .article-header h1 {
+            font-size: 2.8rem;
+            color: #d4af37;
+            margin-bottom: 1rem;
+            animation: slideDown 0.8s ease;
+        }
+        
+        .article-date {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        
+        .article-tags {
+            display: flex;
+            gap: 0.7rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeIn 1s ease 0.3s both;
+        }
+        
+        .tag {
+            background-color: rgba(212, 175, 55, 0.2);
+            color: #d4af37;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: 1px solid #d4af37;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .tag:hover {
+            background-color: #d4af37;
+            color: #1a3a52;
+            transform: translateY(-2px);
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        /* תוכן */
+        .container {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+        
+        .article-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            animation: fadeIn 0.8s ease;
+        }
+        
+        .article-content h2 {
+            color: #1a3a52;
+            font-size: 1.8rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            border-right: 4px solid #d4af37;
+            padding-right: 1rem;
+        }
+        
+        .article-content h2:first-of-type {
+            margin-top: 0;
+        }
+        
+        .article-content p {
+            margin-bottom: 1.5rem;
+            color: #555;
+            font-size: 1.05rem;
+        }
+        
+        .article-content ul {
+            margin: 1.5rem 0;
+            padding-right: 2rem;
+            list-style-position: inside;
+        }
+        
+        .article-content li {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+        
+        .article-content strong {
+            color: #1a3a52;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(26, 58, 82, 0.05) 100%);
+            padding: 1.5rem;
+            border-right: 4px solid #d4af37;
+            border-radius: 8px;
+            margin: 2rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .highlight-box:hover {
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+            transform: translateX(-5px);
+        }
+        
+        /* עמוד קודם/הבא */
+        .nav-articles {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #eee;
+        }
+        
+        .nav-article-link {
+            padding: 1.5rem;
+            border-radius: 10px;
+            background: #f5f5f5;
+            text-decoration: none;
+            color: #1a3a52;
+            transition: all 0.3s ease;
+            border-left: 4px solid #d4af37;
+        }
+        
+        .nav-article-link:hover {
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-left-color: #1a3a52;
+        }
+        
+        .nav-article-label {
+            font-size: 0.9rem;
+            color: #999;
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav-article-title {
+            font-weight: bold;
+            color: #1a3a52;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-article-link:hover .nav-article-title {
+            color: #d4af37;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #1a3a52 0%, #0d1b27 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: right;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h4 {
+            color: #d4af37;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-section a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            color: #d4af37;
+            padding-right: 0.5rem;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            padding-top: 2rem;
+        }
+        
+        .contact-info {
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">ניהולית 100</div>
+            <ul>
+                <li><a href="index.html">עמוד הבית</a></li>
+                <li><a href="about.html">אודות</a></li>
+                <li><a href="services.html">שירותים</a></li>
+                <li><a href="portfolio.html" class="active">מידע מקצועי</a></li>
+                <li><a href="contact.html">יצירת קשר</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="article-header">
+        <div class="article-header-content">
+            <h1>מה זה מקדמות מס הכנסה (ו/או מקדמות ביטוח לאומי)?</h1>
+            <div class="article-date">05/09/2021</div>
+            <div class="article-tags">
+                <span class="tag">#מס_הכנסה</span>
+                <span class="tag">#מקדמות</span>
+                <span class="tag">#עצמאים</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="article-content">
+            <h2>מה זה מקדמות מס הכנסה (ו/או מקדמות ביטוח לאומי)?</h2>
+            <p>כאחד מ-'3 השותפים בעסק', מס הכנסה אינו מעוניין לחכות לסוף שנה כדי לקבל ממכם את המס המגיע לו. הוא חושש שתפשטו רגל או שסתם תוציאו לו את המיץ. (כן כן יש דבר כזה..) עד שהוא יראה ממכם את הכסף.</p>
+            <p>ולכן לפי פקודת מס הכנסה והתקנות מכוחו, יש חובה לשלם מקדמה על חשבון תשלום מס הכנסה שאתם חבים בו על ההכנסות שלכם.</p>
+            <p>לאחר הגשת דו"ח שנתי, שם רואים את חבות המס שלכם, תקבלו החזר (במקרה ששילמתם יותר) או תצטרכו להוסיף עוד (במקרה ששילמתם פחות ממה שצריך או שההכנסה גדלה).</p>
+            <p>בדיוק כך, עם מקדמות ביטוח לאומי.</p>
+            <p>מקדמות הן תשלומים מראש לווים של מס הכנסה. בעצם, הממשלה אומרת לך: "אתה צפוי להרוויח יוצג בשנה זו, לכן תתחיל לשלם עכשיו, בחודשים". זה למניעת מצב שבו עד סוף השנה אנשים לא משלמים מסים.</p>
+            
+            <div class="highlight-box">
+                <strong>💡 דברים חשובים:</strong>
+                <p>המקדמות הן לא מס נוסף! זה חלק מהמסים הכוללים שלך בשנה. בסוף השנה, נסכמים את כל המקדמות ששילמת וחישוב אם צריך לשלם יותר או תקבל החזר.</p>
+            </div>
+            
+            <h2>מי צריך לשלם מקדמות?</h2>
+            <ul>
+                <li>עצמאים שהכנסתם עולה על סכום מסוים</li>
+                <li>חברות פרטיות</li>
+                <li>שותפויות</li>
+                <li>תאגידים</li>
+            </ul>
+            
+            <h2>כמה צריך לשלם?</h2>
+            <p>סכום המקדמות מחושב על בסיס ההכנסה שלך מהשנה הקודמת. מס הכנסה משתמש בחישוב פשוט: הם מחשבים כמה דריך בשנה הקודמת ושוקלים שתשלם סכום דומה השנה.</p>
+            
+            <h2>מתי משלמים?</h2>
+            <ul>
+                <li><strong>רבעוני:</strong> ישנם שלוש תקופות לתשלום מקדמות בשנה</li>
+                <li><strong>חודשי:</strong> אם הכנסתך גבוהה, ייתכן שתצטרך לשלם כל חודש</li>
+                <li><strong>תאריכים קבועים:</strong> כל שנה מס הכנסה מפרסם את התאריכים</li>
+            </ul>
+            
+            <div class="highlight-box">
+                <strong>⚠️ זהירות:</strong>
+                <p>אם לא תשלם מקדמות בעת, תחויב בריביות וקנסות. אדם זה לא חיוביות קלות - הם יכולים להתחזק בהפתעה גם על השכרות שלך.</p>
+            </div>
+            
+            <h2>איך מס הכנסה יודע כמה לתבוע?</h2>
+            <p>מס הכנסה קורא את הדוחות הפיננסיים שלך ובודק את המס שצריך לשלום. אם שלמת פחות מקדמות מהדרוש, תידרש לתסדיר בסוף השנה.</p>
+            
+            <h2>הטעויות הנפוצות</h2>
+            <ul>
+                <li>התעלמות מהמקדמות - זה לא יכול להיות השגה!</li>
+                <li>חישוב לא נכון של סכום המקדמות</li>
+                <li>שכחת לעדכן את מס הכנסה אם ההכנסה שלך גדלה</li>
+                <li>תשלום רגיל בחוברות הלוואות אחרות במקום למס הכנסה</li>
+            </ul>
+            
+            <h2>איך אנחנו יכולים לעזור?</h2>
+            <p>בניהולית 100 אנחנו עוזרים לך:</p>
+            <ul>
+                <li>לחשב את המקדמות הנכונות בהתאם להכנסות שלך</li>
+                <li>ללוודע אותך על התאריכים החשובים</li>
+                <li>למנוע כישלונות וקנסות</li>
+                <li>לפתור בעיות קיימות עם מס הכנסה</li>
+            </ul>
+            
+            <div class="highlight-box">
+                <strong>✅ הצעה:</strong>
+                <p>אם יש לך שאלות על מקדמות המס שלך או אתה לא בטוח אם אתה משלם סכום נכון, <a href="contact.html" style="color: #d4af37; text-decoration: underline;">צור איתנו קשר</a> במהרה!</p>
+            </div>
+        </div>
+        
+        <div class="nav-articles">
+            <a href="article-balance-sheet.html" class="nav-article-link">
+                <div class="nav-article-label">← המאמר הבא</div>
+                <div class="nav-article-title">מה זה הצהרת הון?</div>
+            </a>
+            <a href="portfolio.html" class="nav-article-link" style="text-align: left;">
+                <div class="nav-article-label">חזור לכל המאמרים →</div>
+                <div class="nav-article-title">מידע מקצועי</div>
+            </a>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>שירותים</h4>
+                <a href="services.html">חשבונאות</a>
+                <a href="services.html">ייעוץ מס</a>
+                <a href="services.html">כלכלת משפחה</a>
+                <a href="services.html">מימון</a>
+            </div>
+            <div class="footer-section">
+                <h4>מישרד</h4>
+                <a href="about.html">אודות</a>
+                <a href="portfolio.html">מידע מקצועי</a>
+                <a href="contact.html">צור קשר</a>
+            </div>
+            <div class="footer-section">
+                <h4>יצירת קשר</h4>
+                <div class="contact-info">
+                    <strong>כתובת:</strong><br>
+                    גבעת פנחס 10, בני ברק
+                </div>
+                <div class="contact-info">
+                    <strong>טל:</strong><br>
+                    <a href="tel:035171790">03-517-1790</a>
+                </div>
+                <div class="contact-info">
+                    <strong>אימייל:</strong><br>
+                    <a href="mailto:office@nihulit-100.com">office@nihulit-100.com</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div style="margin-bottom: 1.5rem;">
+                <h4 style="color: #d4af37; margin-bottom: 1rem;">עקבו אחרינו</h4>
+                <div style="display: flex; gap: 1rem; justify-content: center;">
+                    <a href="https://www.facebook.com" target="_blank" style="display: inline-block; width: 40px; height: 40px; background-color: #d4af37; color: #1a3a52; border-radius: 50%; text-align: center; line-height: 40px; text-decoration: none; font-size: 1.2rem; transition: all 0.3s;" onmouseover="this.style.backgroundColor='#1a3a52'; this.style.color='#d4af37';" onmouseout="this.style.backgroundColor='#d4af37'; this.style.color='#1a3a52';">f</a>
+                    <a href="https://www.instagram.com" target="_blank" style="display: inline-block; width: 40px; height: 40px; background-color: #d4af37; color: #1a3a52; border-radius: 50%; text-align: center; line-height: 40px; text-decoration: none; font-size: 1.2rem; transition: all 0.3s;" onmouseover="this.style.backgroundColor='#1a3a52'; this.style.color='#d4af37';" onmouseout="this.style.backgroundColor='#d4af37'; this.style.color='#1a3a52';">📷</a>
+                    <a href="https://www.linkedin.com" target="_blank" style="display: inline-block; width: 40px; height: 40px; background-color: #d4af37; color: #1a3a52; border-radius: 50%; text-align: center; line-height: 40px; text-decoration: none; font-size: 1.2rem; transition: all 0.3s;" onmouseover="this.style.backgroundColor='#1a3a52'; this.style.color='#d4af37';" onmouseout="this.style.backgroundColor='#d4af37'; this.style.color='#1a3a52';">in</a>
+                    <a href="https://wa.me" target="_blank" style="display: inline-block; width: 40px; height: 40px; background-color: #d4af37; color: #1a3a52; border-radius: 50%; text-align: center; line-height: 40px; text-decoration: none; font-size: 1.2rem; transition: all 0.3s;" onmouseover="this.style.backgroundColor='#1a3a52'; this.style.color='#d4af37';" onmouseout="this.style.backgroundColor='#d4af37'; this.style.color='#1a3a52';">W</a>
+                </div>
+            </div>
+            <p>© 2024 ניהולית 100 - כל הזכויות שמורות</p>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBI5BzdEU9ohkajHwnluhfJguokhGge-7Q",
+            authDomain: "nihulit-100.firebaseapp.com",
+            projectId: "nihulit-100",
+            storageBucket: "nihulit-100.firebasestorage.app",
+            messagingSenderId: "957111326397",
+            appId: "1:957111326397:web:a22823f7c0dd13dd3849d4"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // שמור קריאה של מאמר
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                db.collection('userReadings').doc(user.email).set({
+                    'article-tax-advances.html': {
+                        readDate: new Date(),
+                        articleTitle: 'מה זה מקדמות מס הכנסה'
+                    }
+                }, { merge: true }).catch(error => console.error('שגיאה בשמירה:', error));
+            }
+        });
+    </script>
+</body>
+</html>

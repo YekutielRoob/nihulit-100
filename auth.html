@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>התחברות - ניהולית 100</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #1a3a52 0%, #0d1b27 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        
+        .auth-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            padding: 4rem 2rem;
+            max-width: 450px;
+            width: 100%;
+            animation: slideUp 0.6s ease;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .logo-container {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #1a3a52;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tagline {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        h1 {
+            color: #1a3a52;
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        .description {
+            color: #666;
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .google-btn {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            background: white;
+            color: #333;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+        }
+        
+        .google-btn:hover {
+            background: #f8f8f8;
+            border-color: #1a3a52;
+            box-shadow: 0 4px 12px rgba(26, 58, 82, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .google-btn:active {
+            transform: translateY(0);
+        }
+        
+        .google-icon {
+            width: 24px;
+            height: 24px;
+            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMjIuNTYgMTIuMjVjMCAuNzgtLjA3IDEuNTMtLjIgMi4yNUgxMnY0LjI2aDYuMDJjLS4yNiAxLjM3LTEuMDQgMi41My0yLjIxIDMuMzFWMjBIMjBjMi4wOC0xLjkyIDMuMjgtNC43NiAzLjI4LTguMDJ6IiBmaWxsPSIjNDI4NUY0Ii8+PHBhdGggZD0iTTEyIDIyLjU1YzIuOTcgMCA1LjQ3LS45OCA3LjMtMi43OWwLTMuNTEtMi43MmMtLjk3LjY1LTIuMiAxLjA0LTMuNzkgMS4wNEM4LjE3IDIwLjAzIDYuMjEgMTguMTUgNS40NyAxNS43MXMtLjczLTQuODEgMC0tMS4xNEMzLjAyIDkuNDggMy4wMiA3LjUyIDIuNjcgNi4yN0wyLjQ0IDEuNDVIMVYyMmMwITEuNDUgMi4wOCAyLjk3Yy4xNC0uNjEuMjItMS4yNC4yMi0xLjlWNi4yN2MwLTMuOSAzLjE3LTcuMDcgNy4wNy03LjA3czcuMDcgMy4xNyA3LjA3IDcuMDdjMCAzLjktMy4xNyA3LjA3LTcuMDcgNy4wN3oiIGZpbGw9IiNFQTQzMzUiLz48cGF0aCBkPSJNNCA4LjU0YzAtLjc0LjA2LTEuNDYuMTctMi4xNkgxMnYzLjA5SDYuNThjLS4yNy45Mi0uNzIgMS43NS0xLjMyIDIuNDVsLTIuMzItMi4zYzEuMDQtLjk4IDEuNzctMi4yIDIuMDctMy41OHoiIGZpbGw9IiNGQkJDMDQiLz48cGF0aCBkPSJNMTIgMi45N2MxLjU2IDAgMi45OC41NyA0LjA5IDEuNjhsMi45OS0zQzE3LjA0IDAgMTQuNDkgLjAxIDEyIC4wMUMyIDIuNjUgNC4wNDQuNzIgNS4yOEw2Ljc1IDIuNjBDOS4wNSAxLjcxIjEwLjMyIDIuOTcgMTIgMi45N3oiIGZpbGw9IiM0Mjg1RjQiLz48cGF0aCBkPSJNMTIgMjIuNTV2LTMuNThjLS42NSAwLTEuMjktLjEzLTEuOS0uMzdsLTIuMzcgMi4zYzEuNjIuOTggMy40MiAxLjU5IDUuMjcgMS42NXoiIGZpbGw9IiM0Mjg1RjQiLz48L3N2Zz4=') center/contain no-repeat;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            color: #1a3a52;
+            font-weight: 600;
+        }
+        
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #d4af37;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 0.5rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 2rem 0;
+            color: #ccc;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #ddd;
+        }
+        
+        .divider span {
+            padding: 0 1rem;
+            color: #999;
+            font-size: 0.85rem;
+        }
+        
+        .info-box {
+            background: #f0f0f0;
+            border-right: 4px solid #d4af37;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .info-box strong {
+            color: #1a3a52;
+        }
+        
+        #user-info {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            background: #f0f8f5;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+        
+        #user-info h2 {
+            color: #1a3a52;
+            margin-bottom: 1rem;
+        }
+        
+        #user-email {
+            color: #666;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: #d4af37;
+            color: #1a3a52;
+        }
+        
+        .btn-primary:hover {
+            background: #c9a530;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #1a3a52;
+            border: 2px solid #ddd;
+        }
+        
+        .btn-secondary:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .auth-container {
+                padding: 2rem 1.5rem;
+            }
+            
+            h1 {
+                font-size: 1.4rem;
+            }
+            
+            .google-btn {
+                padding: 0.8rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="logo-container">
+            <div class="logo">ניהולית 100</div>
+            <div class="tagline">ייעוץ פיננסי מקצועי</div>
+        </div>
+        
+        <div id="login-section">
+            <h1>התחברות חברים</h1>
+            <p class="description">התחבר דרך חשבון גוגל שלך כדי לגשת לתוכן בעלויות וללוח בקרה אישי</p>
+            
+            <button class="google-btn" id="google-login-btn">
+                <div class="google-icon"></div>
+                <span>התחבר עם Google</span>
+            </button>
+            
+            <div class="info-box">
+                <strong>🔒 בטוח וחסוי:</strong> אנחנו לא שומרים את סיסמתך. Google מאשרת את הזהות שלך בטוח.
+            </div>
+        </div>
+        
+        <div id="user-info">
+            <h2>ברוכים הבאים! 👋</h2>
+            <div id="user-email"></div>
+            <div class="btn-group">
+                <a href="dashboard.html" class="btn btn-primary">לוח בקרה</a>
+                <button class="btn btn-secondary" id="logout-btn">התנתקות</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-auth-compat.js"></script>
+
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBI5BzdEU9ohkajHwnluhfJguokhGge-7Q",
+            authDomain: "nihulit-100.firebaseapp.com",
+            projectId: "nihulit-100",
+            storageBucket: "nihulit-100.firebasestorage.app",
+            messagingSenderId: "957111326397",
+            appId: "1:957111326397:web:a22823f7c0dd13dd3849d4"
+        };
+
+        // אתחל Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        // קבל אלמנטים מה-DOM
+        const googleLoginBtn = document.getElementById('google-login-btn');
+        const logoutBtn = document.getElementById('logout-btn');
+        const loginSection = document.getElementById('login-section');
+        const userInfo = document.getElementById('user-info');
+        const userEmail = document.getElementById('user-email');
+
+        // בדוק אם משתמש מחובר כבר
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                // משתמש מחובר
+                showUserInfo(user);
+            } else {
+                // משתמש לא מחובר
+                showLoginForm();
+            }
+        });
+
+        // פונקציה להוספת פרטי משתמש
+        function showUserInfo(user) {
+            loginSection.style.display = 'none';
+            userInfo.style.display = 'block';
+            userEmail.textContent = `📧 ${user.email}`;
+            
+            // שמור את מידע המשתמש בהתראה מקומית
+            localStorage.setItem('user', JSON.stringify({
+                uid: user.uid,
+                email: user.email,
+                displayName: user.displayName || 'משתמש'
+            }));
+        }
+
+        // פונקציה להצגת טופס התחברות
+        function showLoginForm() {
+            loginSection.style.display = 'block';
+            userInfo.style.display = 'none';
+            localStorage.removeItem('user');
+        }
+
+        // התחברות דרך Google
+        googleLoginBtn.addEventListener('click', () => {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider)
+                .then((result) => {
+                    // התחברות הצליחה
+                    console.log('משתמש מחובר:', result.user.email);
+                })
+                .catch((error) => {
+                    // שגיאה בהתחברות
+                    console.error('שגיאה בהתחברות:', error.message);
+                    alert('שגיאה בהתחברות: ' + error.message);
+                });
+        });
+
+        // התנתקות
+        logoutBtn.addEventListener('click', () => {
+            auth.signOut()
+                .then(() => {
+                    console.log('משתמש התנתק');
+                    showLoginForm();
+                })
+                .catch((error) => {
+                    console.error('שגיאה בהתנתקות:', error.message);
+                });
+        });
+    </script>
+</body>
+</html>

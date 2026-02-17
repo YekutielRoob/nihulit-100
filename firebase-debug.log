@@ -1,0 +1,52 @@
+[debug] [2026-02-17T00:31:39.658Z] ----------------------------------------------------------------------
+[debug] [2026-02-17T00:31:39.663Z] Command:       C:\Program Files (x86)\nodejs\node.exe C:\Users\user\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --project nihulit-100 --token %FIREBASE_TOKEN%
+[debug] [2026-02-17T00:31:39.663Z] CLI Version:   15.6.0
+[debug] [2026-02-17T00:31:39.663Z] Platform:      win32
+[debug] [2026-02-17T00:31:39.663Z] Node Version:  v24.12.0
+[debug] [2026-02-17T00:31:39.664Z] Time:          Tue Feb 17 2026 02:31:39 GMT+0200 (שעון ישראל (חורף))
+[debug] [2026-02-17T00:31:39.664Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-02-17T00:31:39.668Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2026-02-17T00:31:43.253Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-02-17T00:31:43.253Z] > authorizing via --token option
+[warn] !  Authenticating with `--token` is deprecated and will be removed in a future major version of `firebase-tools`. Instead, use a service account key with `GOOGLE_APPLICATION_CREDENTIALS`: https://cloud.google.com/docs/authentication/getting-started 
+[debug] [2026-02-17T00:31:43.256Z] [iam] checking project nihulit-100 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2026-02-17T00:31:43.257Z] No OAuth tokens found
+[debug] [2026-02-17T00:31:43.257Z] No OAuth tokens found
+[debug] [2026-02-17T00:31:43.258Z] > refreshing access token with scopes: []
+[debug] [2026-02-17T00:31:43.261Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-02-17T00:31:43.261Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-02-17T00:31:43.482Z] *** [apiv2] error from fetch(https://firebase-public.firebaseio.com/cli.json, {"headers":{},"method":"GET"}): FetchError: request to https://firebase-public.firebaseio.com/cli.json failed, reason: self-signed certificate in certificate chain
+[warn] !  Unable to fetch the CLI MOTD and remote config. This is not a fatal error, but may indicate an issue with your network connection. 
+[debug] [2026-02-17T00:31:43.482Z] Failed to fetch MOTD FirebaseError: Failed to make request to https://firebase-public.firebaseio.com/cli.json
+[debug] [2026-02-17T00:31:43.502Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2026-02-17T00:31:43.503Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-02-17T00:31:43.503Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/nihulit-100:testIamPermissions [none]
+[debug] [2026-02-17T00:31:43.503Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/nihulit-100:testIamPermissions  x-goog-user-project=nihulit-100
+[debug] [2026-02-17T00:31:43.503Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/nihulit-100:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-02-17T00:31:44.559Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/nihulit-100:testIamPermissions 401
+[debug] [2026-02-17T00:31:44.559Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/nihulit-100:testIamPermissions {"error":{"code":401,"message":"Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.","status":"UNAUTHENTICATED","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"ACCESS_TOKEN_TYPE_UNSUPPORTED","metadata":{"method":"google.cloudresourcemanager.v1.Projects.TestIamPermissions","service":"cloudresourcemanager.googleapis.com"}}]}}
+[debug] [2026-02-17T00:31:44.559Z] Got a 401 Unauthenticated error for a call that required authentication. Refreshing tokens.
+[debug] [2026-02-17T00:31:44.559Z] No OAuth tokens found
+[debug] [2026-02-17T00:31:44.559Z] No OAuth tokens found
+[debug] [2026-02-17T00:31:44.560Z] > refreshing access token with scopes: []
+[debug] [2026-02-17T00:31:44.560Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-02-17T00:31:44.560Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-02-17T00:31:44.636Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2026-02-17T00:31:44.636Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-02-17T00:31:44.637Z] [iam] error while checking permissions, command may fail: Request to https://cloudresourcemanager.googleapis.com/v1/projects/nihulit-100:testIamPermissions had HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+[debug] [2026-02-17T00:31:44.638Z] No OAuth tokens found
+[debug] [2026-02-17T00:31:44.638Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/nihulit-100 [none]
+[debug] [2026-02-17T00:31:44.842Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/nihulit-100 401
+[debug] [2026-02-17T00:31:44.842Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/nihulit-100 {"error":{"code":401,"message":"Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.","status":"UNAUTHENTICATED"}}
+[debug] [2026-02-17T00:31:44.842Z] Got a 401 Unauthenticated error for a call that required authentication. Refreshing tokens.
+[debug] [2026-02-17T00:31:44.842Z] No OAuth tokens found
+[debug] [2026-02-17T00:31:44.843Z] No OAuth tokens found
+[debug] [2026-02-17T00:31:44.843Z] > refreshing access token with scopes: []
+[debug] [2026-02-17T00:31:44.843Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-02-17T00:31:44.843Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-02-17T00:31:44.919Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2026-02-17T00:31:44.919Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-02-17T00:31:44.920Z] Request to https://firebase.googleapis.com/v1beta1/projects/nihulit-100 had HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+[error] 
+[error] Error: Assertion failed: resolving hosting target of a site with no site name or target name. This should have caused an error earlier

@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מידע מקצועי - ניהולית 100</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f5f5 0%, #fafafa 100%);
+        }
+        
+        /* ניווט */
+        nav {
+            background: linear-gradient(135deg, #1a3a52 0%, #0d1b27 100%);
+            padding: 1.5rem;
+            position: sticky;
+            top: 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #d4af37;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.7rem 1.2rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #d4af37;
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        nav a.active {
+            background-color: #d4af37;
+            color: #1a3a52;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .auth-buttons .user-email {
+            color: #d4af37;
+            font-size: 0.9rem;
+            max-width: 120px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .auth-btn {
+            background-color: #d4af37;
+            color: #1a3a52;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .auth-btn:hover {
+            background-color: #c9a530;
+            transform: translateY(-2px);
+        }
+        
+        .logout-btn {
+            background-color: transparent;
+            color: #d4af37;
+            border: 2px solid #d4af37;
+            padding: 0.5rem 1rem;
+        }
+        
+        .logout-btn:hover {
+            background-color: #d4af37;
+            color: #1a3a52;
+        }
+        
+        /* Header */
+        .page-header {
+            background: linear-gradient(135deg, #1a3a52 0%, #2c5f8d 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.1;
+            background-image: radial-gradient(circle, #d4af37 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveBackground 20s linear infinite;
+        }
+        
+        @keyframes moveBackground {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: #d4af37;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+            animation: slideDown 0.8s ease;
+        }
+        
+        .page-header p {
+            position: relative;
+            z-index: 1;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* תוכן */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+        
+        /* פילטר */
+        .filter-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            animation: fadeIn 0.6s ease;
+        }
+        
+        .filter-title {
+            color: #1a3a52;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            border-right: 4px solid #d4af37;
+            padding-right: 1rem;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        
+        .filter-btn {
+            padding: 0.7rem 1.5rem;
+            border: 2px solid #d4af37;
+            background: white;
+            color: #1a3a52;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .filter-btn:hover {
+            background-color: #d4af37;
+            color: #1a3a52;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(212, 175, 55, 0.3);
+        }
+        
+        .filter-btn.active {
+            background-color: #d4af37;
+            color: #1a3a52;
+            box-shadow: 0 6px 12px rgba(212, 175, 55, 0.3);
+        }
+        
+        /* מאמרים */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .article-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            animation: scaleIn 0.5s ease;
+            border-top: 5px solid #d4af37;
+        }
+        
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .article-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+        
+        .article-header-card {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(26, 58, 82, 0.05) 0%, rgba(212, 175, 55, 0.05) 100%);
+            border-bottom: 1px solid #eee;
+        }
+        
+        .article-title {
+            color: #1a3a52;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            transition: color 0.3s ease;
+        }
+        
+        .article-card:hover .article-title {
+            color: #d4af37;
+        }
+        
+        .article-date {
+            color: #999;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+        
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .article-tag {
+            background-color: rgba(212, 175, 55, 0.15);
+            color: #1a3a52;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+        
+        .article-tag:hover {
+            background-color: #d4af37;
+            color: white;
+        }
+        
+        .article-body {
+            padding: 1.5rem;
+        }
+        
+        .article-preview {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        
+        .read-more {
+            display: inline-block;
+            color: #d4af37;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .read-more::after {
+            content: '←';
+            margin-right: 0.5rem;
+            transition: margin 0.3s ease;
+        }
+        
+        .read-more:hover::after {
+            margin-right: 0.2rem;
+        }
+        
+        .article-card:hover .read-more {
+            color: #1a3a52;
+        }
+        
+        /* No results */
+        .no-articles {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: #999;
+            font-size: 1.1rem;
+        }
+        
+        .no-articles-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #1a3a52 0%, #0d1b27 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: right;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h4 {
+            color: #d4af37;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-section a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            color: #d4af37;
+            padding-right: 0.5rem;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            padding-top: 2rem;
+        }
+        
+        .contact-info {
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">ניהולית 100</div>
+            <ul>
+                <li><a href="index.html">עמוד הבית</a></li>
+                <li><a href="about.html">אודות</a></li>
+                <li><a href="services.html">שירותים</a></li>
+                <li><a href="professional-info.html" class="active">מידע מקצועי</a></li>
+                <li><a href="contact.html">יצירת קשר</a></li>                <li class="auth-buttons" id="auth-buttons">
+                    <a href="auth.html" class="auth-btn" id="login-btn">התחברות</a>
+                </li>            </ul>
+        </div>
+    </nav>
+    
+    <div class="page-header">
+        <h1>מידע מקצועי ומאמרים</h1>
+        <p>קראו את המאמרים והטיפים שלנו בנושאים פיננסיים שונים</p>
+    </div>
+    
+    <div class="container">
+        <div class="filter-section">
+            <div class="filter-title">🏷️ סנן לפי נושא</div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterArticles('all')">כל המאמרים</button>
+                <button class="filter-btn" onclick="filterArticles('מס הכנסה')">מס הכנסה</button>
+                <button class="filter-btn" onclick="filterArticles('מקדמות')">מקדמות</button>
+                <button class="filter-btn" onclick="filterArticles('הצהרת הון')">הצהרת הון</button>
+                <button class="filter-btn" onclick="filterArticles('קרן השתלמות')">קרן השתלמות</button>
+                <button class="filter-btn" onclick="filterArticles('חסכון')">חסכון</button>
+                <button class="filter-btn" onclick="filterArticles('עצמאים')">עצמאים</button>
+                <button class="filter-btn" onclick="filterArticles('ייעוץ עסקי')">ייעוץ עסקי</button>
+                <button class="filter-btn" onclick="filterArticles('תכנון מס')">תכנון מס</button>
+            </div>
+        </div>
+        
+        <div class="articles-grid" id="articlesGrid">
+            <!-- יוצא על ידי JavaScript -->
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>שירותים</h4>
+                <a href="services.html">חשבונאות</a>
+                <a href="services.html">ייעוץ מס</a>
+                <a href="services.html">כלכלת משפחה</a>
+                <a href="services.html">מימון</a>
+            </div>
+            <div class="footer-section">
+                <h4>מישרד</h4>
+                <a href="about.html">אודות</a>
+                <a href="portfolio.html">מידע מקצועי</a>
+                <a href="contact.html">צור קשר</a>
+            </div>
+            <div class="footer-section">
+                <h4>יצירת קשר</h4>
+                <div class="contact-info">
+                    <strong>כתובת:</strong><br>
+                    גבעת פנחס 10, בני ברק
+                </div>
+                <div class="contact-info">
+                    <strong>טל:</strong><br>
+                    <a href="tel:035171790">03-517-1790</a>
+                </div>
+                <div class="contact-info">
+                    <strong>אימייל:</strong><br>
+                    <a href="mailto:office@nihulit-100.com">office@nihulit-100.com</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div style="margin-bottom: 1.5rem;">
+                <h4 style="color: #d4af37; margin-bottom: 1rem;">עקבו אחרינו</h4>
+                <div style="display: flex; gap: 1rem; justify-content: center;">
+                    <a href="https://www.facebook.com" target="_blank" style="display: inline-block; width: 40px; height: 40px; background-color: #d4af37; color: #1a3a52; border-radius: 50%; text-align: center; line-height: 40px; text-decoration: none; font-size: 1.2rem; transition: all 0.3s;" onmouseover="this.style.backgroundColor='#1a3a52'; this.style.color='#d4af37';" onmouseout="this.style.backgroundColor='#d4af37'; this.style.color='#1a3a52';">f</a>
+                    <a href="https://www.instagram.com" target="_blank" style="display: inline-block; width: 40px; height: 40px; background-color: #d4af37; color: #1a3a52; border-radius: 50%; text-align: center; line-height: 40px; text-decoration: none; font-size: 1.2rem; transition: all 0.3s;" onmouseover="this.style.backgroundColor='#1a3a52'; this.style.color='#d4af37';" onmouseout="this.style.backgroundColor='#d4af37'; this.style.color='#1a3a52';">📷</a>
+                    <a href="https://www.linkedin.com" target="_blank" style="display: inline-block; width: 40px; height: 40px; background-color: #d4af37; color: #1a3a52; border-radius: 50%; text-align: center; line-height: 40px; text-decoration: none; font-size: 1.2rem; transition: all 0.3s;" onmouseover="this.style.backgroundColor='#1a3a52'; this.style.color='#d4af37';" onmouseout="this.style.backgroundColor='#d4af37'; this.style.color='#1a3a52';">in</a>
+                    <a href="https://wa.me" target="_blank" style="display: inline-block; width: 40px; height: 40px; background-color: #d4af37; color: #1a3a52; border-radius: 50%; text-align: center; line-height: 40px; text-decoration: none; font-size: 1.2rem; transition: all 0.3s;" onmouseover="this.style.backgroundColor='#1a3a52'; this.style.color='#d4af37';" onmouseout="this.style.backgroundColor='#d4af37'; this.style.color='#1a3a52';">W</a>
+                </div>
+            </div>
+            <p>© 2024 ניהולית 100 - כל הזכויות שמורות</p>
+        </div>
+    </footer>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-auth-compat.js"></script>
+
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBI5BzdEU9ohkajHwnluhfJguokhGge-7Q",
+            authDomain: "nihulit-100.firebaseapp.com",
+            projectId: "nihulit-100",
+            storageBucket: "nihulit-100.firebasestorage.app",
+            messagingSenderId: "957111326397",
+            appId: "1:957111326397:web:a22823f7c0dd13dd3849d4"
+        };
+
+        // אתחל Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        // עדכן ניווט בהתאם למצב התחברות
+        auth.onAuthStateChanged((user) => {
+            const authButtons = document.getElementById('auth-buttons');
+            
+            if (user) {
+                // משתמש מחובר
+                authButtons.innerHTML = `
+                    <span class="user-email">${user.email}</span>
+                    <a href="dashboard.html" class="auth-btn">לוח בקרה</a>
+                    <button class="auth-btn logout-btn" id="logout-btn">התנתקות</button>
+                `;
+                
+                // הוסף קריאה לכפתור התנתקות
+                document.getElementById('logout-btn').addEventListener('click', () => {
+                    auth.signOut();
+                });
+            } else {
+                // משתמש לא מחובר
+                authButtons.innerHTML = `<a href="auth.html" class="auth-btn">התחברות</a>`;
+            }
+        });
+
+        // תוכן הדף - מאמרים
+        const articles = [
+            {
+                title: '3 שותפים בעסק עצמאי – מע"מ, מס הכנסה, ביטוח לאומי',
+                date: '23/03/2022',
+                preview: 'כל מי שמעוניין לפתוח עסק שואל את עצמו מיד בעקבות שמועות על מיסים גבוהים שיש לשלם כאן. בואו נכיר את 3 השותפים בעסק: מע"מ, מס הכנסה וביטוח לאומי.',
+                tags: ['מס הכנסה', 'מע"מ', 'ביטוח לאומי', 'עצמאים'],
+                url: 'article-three-partners.html'
+            },
+            {
+                title: 'חוב טוב לעומת חוב רע',
+                date: '14/02/2020',
+                preview: 'כדי להתנהל נכון מבחינה כלכלית, יש להבדיל בין חוב טוב לחוב רע. חוב טוב ממן נכסים שיניבו רווחים, וחוב רע הוא צריכה שוטפת שלא מביאה הכנסות.',
+                tags: ['ניהול פיננסי', 'חוב', 'תכנון כלכלי'],
+                url: 'article-good-bad-debt.html'
+            },
+            {
+                title: 'מה זה מקדמות מס הכנסה (ו/או מקדמות ביטוח לאומי)?',
+                date: '05/09/2021',
+                preview: 'כאחד מ-"3 השותפים בעסק", מס הכנסה אינו מעוניין לחכות לסוף שנה כדי לקבל ממך את המס. לכן קיימות מקדמות שצריך לשלם בשיעורים וביום קבוע בחודש.',
+                tags: ['מס הכנסה', 'מקדמות', 'עצמאים'],
+                url: 'article-tax-advances.html'
+            },
+            {
+                title: 'מה זה הצהרת הון?',
+                date: '21/05/2021',
+                preview: 'הצהרת הון זה בעצם ריכוז כל ההון וההתחייבויות (מה שאתה חייב לאחרים) שלך. ובשורה התחתונה רואים בדיוק כמה אתם שווים מבחינה כלכלית.',
+                tags: ['הצהרת הון', 'חשבונאות', 'בדיקות מס'],
+                url: 'article-balance-sheet.html'
+            },
+            {
+                title: 'קרן השתלמות לעצמאים, למה זה טוב..',
+                date: '23/12/2021',
+                preview: 'קרן השתלמות היא חסכון חובה שמעסיקים צריכים להפקיד לעובדים שלהם כל חודש. לעצמאים, הם יכולים להפקיד לעצמם אם רוצים.',
+                tags: ['קרן השתלמות', 'עצמאים', 'חסכון'],
+                url: 'article-savings-fund.html'
+            },
+            {
+                title: 'ייעוץ, תכנון והחזרי מס',
+                date: '23/06/2022',
+                preview: 'כל עסק חייב לתכנן את מהלכיו העסקיים כך שינצל את מיטב האפשרויות שהוא זכאי להם על פי חוק כדי להקטין את המס שלו.',
+                tags: ['תכנון מס', 'ייעוץ עסקי', 'מס הכנסה'],
+                url: 'article-tax-planning.html'
+            }
+        ];
+        
+        let currentFilter = 'all';
+        
+        function renderArticles(filter = 'all') {
+            const grid = document.getElementById('articlesGrid');
+            let filtered = articles;
+            
+            if (filter !== 'all') {
+                filtered = articles.filter(article => article.tags.includes(filter));
+            }
+            
+            if (filtered.length === 0) {
+                grid.innerHTML = '<div class="no-articles" style="grid-column: 1 / -1;"><div class="no-articles-icon">📭</div>לא נמצאו מאמרים בנושא זה</div>';
+                return;
+            }
+            
+            grid.innerHTML = filtered.map(article => `
+                <div class="article-card">
+                    <div class="article-header-card">
+                        <h3 class="article-title">${article.title}</h3>
+                        <div class="article-date">📅 ${article.date}</div>
+                        <div class="article-tags">
+                            ${article.tags.map(tag => `<span class="article-tag">#${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                    <div class="article-body">
+                        <p class="article-preview">${article.preview}</p>
+                        <a href="${article.url}" class="read-more">קרא את המאמר המלא</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function filterArticles(tag) {
+            currentFilter = tag;
+            
+            // עדכון כפתורים פעילים
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            renderArticles(tag);
+        }
+        
+        // טעינה ראשונית
+        renderArticles();
+    </script>
+</body>
+</html>

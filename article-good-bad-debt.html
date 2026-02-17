@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>חוב טוב לעומת חוב רע - ניהולית 100</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background-color: #fafafa;
+        }
+        
+        /* ניווט */
+        nav {
+            background: linear-gradient(135deg, #1a3a52 0%, #0d1b27 100%);
+            padding: 1.5rem;
+            position: sticky;
+            top: 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #d4af37;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.7rem 1.2rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #d4af37;
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* תוכן */
+        .container {
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+        
+        .article-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            animation: fadeIn 0.6s ease;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .article-header {
+            border-right: 5px solid #d4af37;
+            padding-right: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            color: #1a3a52;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .article-meta {
+            display: flex;
+            gap: 1.5rem;
+            color: #888;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .article-tags {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        
+        .article-tag {
+            background-color: #f0f0f0;
+            color: #1a3a52;
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .article-content {
+            line-height: 2;
+            color: #444;
+        }
+        
+        .article-content h2 {
+            color: #1a3a52;
+            font-size: 1.6rem;
+            margin: 2rem 0 1rem 0;
+            border-right: 4px solid #d4af37;
+            padding-right: 1rem;
+        }
+        
+        .article-content h3 {
+            color: #1a3a52;
+            font-size: 1.3rem;
+            margin: 1.5rem 0 0.8rem 0;
+        }
+        
+        .article-content p {
+            margin-bottom: 1.3rem;
+            text-align: justify;
+        }
+        
+        .article-content ul {
+            margin: 1.5rem 0 1.5rem 2rem;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .highlight {
+            background-color: #fff3cd;
+            padding: 1.5rem;
+            border-right: 4px solid #d4af37;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+        
+        .good-debt {
+            background-color: #d4edda;
+            padding: 1.5rem;
+            border-right: 4px solid #28a745;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+        
+        .bad-debt {
+            background-color: #f8d7da;
+            padding: 1.5rem;
+            border-right: 4px solid #dc3545;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+        
+        /* תחתון */
+        footer {
+            background-color: #1a3a52;
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: #d4af37;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            color: #d4af37;
+        }
+        
+        .social-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: #d4af37;
+            color: #1a3a52;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4);
+            background-color: #fff;
+        }
+        
+        @media (max-width: 768px) {
+            .article-container {
+                padding: 2rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">ניהולית 100</div>
+            <ul>
+                <li><a href="index.html">דף הבית</a></li>
+                <li><a href="about.html">אודות</a></li>
+                <li><a href="services.html">שירותים</a></li>
+                <li><a href="portfolio.html">מאמרים</a></li>
+                <li><a href="contact.html">יצירת קשר</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <article class="article-container">
+            <div class="article-header">
+                <h1>חוב טוב לעומת חוב רע</h1>
+                <div class="article-meta">
+                    <span>📅 14/02/2020</span>
+                    <span>✍️ ניהולית 100</span>
+                </div>
+                <div class="article-tags">
+                    <span class="article-tag">#ניהול פיננסי</span>
+                    <span class="article-tag">#חוב</span>
+                    <span class="article-tag">#תכנון כלכלי</span>
+                </div>
+            </div>
+
+            <div class="article-content">
+                <p>כדי להתנהל נכון מבחינה כלכלית, יש להבדיל בין חוב טוב לחוב רע. מצד אחד, לא להירתע מלקחת חוב טוב, ומצד שני, להירתע היטב מלקחת חוב רע.</p>
+                
+                <p>בואו נבין איך זה עובד ובאילו מקרים עסקי לקחת חוב.</p>
+
+                <h2>מה בין חוב טוב לחוב רע?</h2>
+
+                <div class="good-debt">
+                    <h3>💚 חוב טוב</h3>
+                    <p>חוב טוב נועד לממן רכישת נכסים (כמו עסק או נכס נדל"ן וכדומה) שיניבו רווחים עתידיים מהנכסים הללו.</p>
+                    
+                    <p><strong>ולמה זה טוב?</strong> ובכן, כי בעצם אי אפשר לגדול ולהכניס כסף גדול לפעיל אלא דרך מינוף עם הלוואות. כשאתה בונה בית שווה ל-1 מיליון ש"ח, אתה לוקח הלוואה של 500,000 ש"ח (בנוסף לצי שלך). הנכס הזה ירד בערך או יעלה אך בכל מקרה, זהו נכס שתוכל לשמור או למכור.</p>
+                </div>
+
+                <div class="bad-debt">
+                    <h3>❌ חוב רע</h3>
+                    <p>חוב רע, הוא חוב שנועד ל'בזבוזים' ולצריכה שוטפת שלא מביאה לידי הכנסות אלא לידי הוצאות.</p>
+                    
+                    <p><strong>דוגמאות לחוב רע:</strong></p>
+                    <ul>
+                        <li>חוב לקניית רכב חדש יותר (בגלל שלשכנים יש..)</li>
+                        <li>שיפוץ המטבח (כששיפצנו את זה כבר לפני 3 שנים..)</li>
+                        <li>חוב להוצאות חיים או חופשות</li>
+                        <li>טלפון חדש על אשראי</li>
+                    </ul>
+                </div>
+
+                <h2>מה הבעיה בחוב רע?</h2>
+                
+                <p>וזה רק ההתחלה.. כי בהמשך, אם לא נזהרים, מגיעים - בעקבות אפקט הריבית על ריבית - לחובות גדולים ולשאר מרעין בישין.</p>
+                
+                <p>דוגמה פשוטה: אתה לוקח אשראי של 5,000 ש"ח לטלפון או לטיול. הריבית היא 15% בשנה. אם אני לא מחזיר זה לחודשים, אני רואה ש-15% מ-5,000 הם 750 ש"ח. וחודש הבא הריבית מחויבת על 5,750 ש"ח וכו'. זה הולך ובוער...</p>
+
+                <h2>תשנו ותשפרו עכשיו</h2>
+                
+                <p>בואו לבדוק את כלל החובות שלכם ולעשות בהם סדר. וגם להפוך חובות רעים לחובות טובים!</p>
+                
+                <div class="highlight">
+                    <strong>דעו זאת:</strong> לא כל חוב הוא רע. חוב שתחזירו בזמן, שנלקח לרכישת נכס או השקעה, זהו חוב טוב. חוב שנלקח לצריכה וגם לא תחזירו בזמן - זהו חוב רע.
+                </div>
+
+                <p><strong>צרו איתנו קשר ונשמח לעזור לכם בתכנון ובניהול הפיננסים שלכם.</strong></p>
+            </div>
+        </article>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>אודות</h3>
+                <p>ניהולית 100 מספקת ייעוץ פיננסי מקצועי לעסקים קטנים וגדולים בישראל. אנו מתמחים בתכנון מס, ניהול חסכונות ותכנון עסקי.</p>
+                <div class="social-buttons">
+                    <a href="https://www.facebook.com/nihulit100" class="social-btn" title="Facebook">f</a>
+                    <a href="https://www.instagram.com" class="social-btn" title="Instagram">📷</a>
+                    <a href="https://www.linkedin.com" class="social-btn" title="LinkedIn">in</a>
+                    <a href="https://wa.link/qmyxzg" class="social-btn" title="WhatsApp">W</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>שירותים</h3>
+                <ul>
+                    <li><a href="services.html">חשבונאות</a></li>
+                    <li><a href="services.html">ייעוץ מס</a></li>
+                    <li><a href="services.html">תכנון פיננסי</a></li>
+                    <li><a href="services.html">ניהול חסכונות</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>יצירת קשר</h3>
+                <ul>
+                    <li>📞 <a href="tel:+972351717790">03-517-1790</a></li>
+                    <li>📧 <a href="mailto:office@nihulit-100.com">office@nihulit-100.com</a></li>
+                    <li>📍 גבעת פנחס 10, בני ברק</li>
+                    <li><a href="contact.html">טופס יצירת קשר</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem;">
+            <p>&copy; 2024 ניהולית 100. כל הזכויות שמורות.</p>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBI5BzdEU9ohkajHwnluhfJguokhGge-7Q",
+            authDomain: "nihulit-100.firebaseapp.com",
+            projectId: "nihulit-100",
+            storageBucket: "nihulit-100.firebasestorage.app",
+            messagingSenderId: "957111326397",
+            appId: "1:957111326397:web:a22823f7c0dd13dd3849d4"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // שמור קריאה של מאמר
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                db.collection('userReadings').doc(user.email).set({
+                    'article-good-bad-debt.html': {
+                        readDate: new Date(),
+                        articleTitle: 'חוב טוב לעומת חוב רע'
+                    }
+                }, { merge: true }).catch(error => console.error('שגיאה בשמירה:', error));
+            }
+        });
+    </script>
+</body>
+</html>
