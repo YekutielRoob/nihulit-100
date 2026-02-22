@@ -345,12 +345,14 @@
 
         /* Scroll reveal */
         .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: revealUp 0.6s ease forwards;
+            animation: revealUp 0.6s ease both;
         }
         @keyframes revealUp {
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { animation: none; opacity: 1; transform: none; }
         }
 
         /* Card number badge */
@@ -706,30 +708,36 @@
         };
 
         // אתחל Firebase
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
+        try {
+            firebase.initializeApp(firebaseConfig);
+            const auth = firebase.auth();
 
-        // עדכן ניווט בהתאם למצב התחברות
-        auth.onAuthStateChanged((user) => {
-            const authButtons = document.getElementById('auth-buttons');
-            
-            if (user) {
-                // משתמש מחובר
-                authButtons.innerHTML = `
-                    <span class="user-email">${user.email}</span>
-                    <a href="dashboard.html" class="auth-btn">לוח בקרה</a>
-                    <button class="auth-btn logout-btn" id="logout-btn">התנתקות</button>
-                `;
+            // עדכן ניווט בהתאם למצב התחברות
+            auth.onAuthStateChanged((user) => {
+                const authButtons = document.getElementById('auth-buttons');
                 
-                // הוסף קריאה לכפתור התנתקות
-                document.getElementById('logout-btn').addEventListener('click', () => {
-                    auth.signOut();
-                });
-            } else {
-                // משתמש לא מחובר
-                authButtons.innerHTML = `<a href="auth.html" class="auth-btn">התחברות</a>`;
-            }
-        });
+                if (user) {
+                    // משתמש מחובר
+                    authButtons.innerHTML = `
+                        <span class="user-email">${user.email}</span>
+                        <a href="dashboard.html" class="auth-btn">לוח בקרה</a>
+                        <button class="auth-btn logout-btn" id="logout-btn">התנתקות</button>
+                    `;
+                    
+                    // הוסף קריאה לכפתור התנתקות
+                    document.getElementById('logout-btn').addEventListener('click', () => {
+                        auth.signOut();
+                    });
+                } else {
+                    // משתמש לא מחובר
+                    authButtons.innerHTML = `<a href="auth.html" class="auth-btn">התחברות</a>`;
+                }
+            });
+        } catch (e) {
+            // Firebase לא זמין — הצג כפתור התחברות רגיל
+            const authButtons = document.getElementById('auth-buttons');
+            if (authButtons) authButtons.innerHTML = `<a href="auth.html" class="auth-btn">התחברות</a>`;
+        }
 
         // תוכן הדף - מאמרים
         const articles = [
@@ -831,6 +839,14 @@
         
         // טעינה ראשונית
         renderArticles();
+
+        // ודא שהמאמרים תמיד נראים גם אם האנימציה לא עובדת
+        setTimeout(() => {
+            document.querySelectorAll('.article-card').forEach(card => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            });
+        }, 1500);
 
         // Scroll progress bar
         window.addEventListener('scroll', () => {
